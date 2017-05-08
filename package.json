@@ -1,0 +1,27 @@
+{
+  "name": "langly",
+  "productName": "Langly",
+  "version": "1.0.0",
+  "description": "Manage Laravel json language files",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . --overwrite --prune=true --icon=icons/icon.icns --out=release-builds"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "laravel",
+    "language",
+    "json",
+    "localization"
+  ],
+  "author": "Christoffer Korvald",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "~1.6.8",
+    "electron-packager": "^8.7.0"
+  },
+  "dependencies": {
+    "vue": "^2.3.2"
+  }
+}
