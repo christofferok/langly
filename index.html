@@ -81,7 +81,7 @@
                 {{ item.key }}
               </label>
               <div class="col-sm-6">
-                <input :id="'key-'+index" class="form-control" :value="item.value" @input="updateValue(item.key, $event.target.value);">
+                <textarea rows="1" :id="'key-'+index" class="form-control" :value="item.value" @input="updateValue(item.key, $event.target.value);"></textarea>
               </div>
             </div>
           </div>
