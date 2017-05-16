@@ -1,0 +1,47 @@
+[v-cloak]{
+  display: none;
+}
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  z-index: 100;
+  border-bottom: 1px solid #ccc;
+  background: #DBE7E2;
+}
+header h1{
+  font-size: 1.7em;
+}
+body{
+  margin-top: 85px;
+}
+
+.lang-items .row{
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.logo{
+  max-width: 100%;
+  height: auto;
+}
+.custom-modal{
+  min-width: 400px;
+  background: #fff;
+  padding: 15px;
+  margin: auto;
+  max-width: 100vw;
+  overflow: scroll;
+  max-height: 100vh;
+}
+.custom-modal-backdrop{
+  z-index: 10000;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+}
