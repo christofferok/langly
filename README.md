@@ -11,7 +11,7 @@ Download one of the prebuilt apps from [https://github.com/christofferok/langly/
 
 Any .json language files managed with the app will be overwritten on save, so make sure you use git or keep a backup of your files 😊
 
-<img alt="Usage" src="usage.gif">
+<img alt="Usage" src="https://cloud.githubusercontent.com/assets/11269635/26125501/a60e39d0-3a82-11e7-8916-e4012efa2a6a.gif">
 
 ## Run from source
 
