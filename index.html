@@ -29,13 +29,18 @@
       border-bottom: 1px solid #eee;
       padding-bottom: 15px;
     }
+    .logo{
+      width: 40px;
+      height: auto;
+      position: absolute;
+    }
     </style>
   </head>
   <body>
     <div id="app" v-cloak class="container-fluid">
         
         <header class="d-md-flex">
-          <h1 class="mr-3">Langly</h1>
+          <h1 class="mr-3" style="width:40px;"><img class="logo" alt="Langly" src="icons/icon.png" srcset="icons/icon.png 1x, icons/icon@2x.png 2x"></h1>
           
           <div class="mr-3">
             <input type="search" v-model="query" class="form-control" placeholder="Search for key">
