@@ -4,6 +4,7 @@ const { getLangs, getKeysInFiles, getFilesInDirDeep, writeLangFile } = require('
 
 const {ipcRenderer} = require('electron');
 const fs = require('fs');
+const path = require('path');
 
 // Array diff
 Array.prototype.diff = function(a) {
@@ -104,7 +105,7 @@ const app = new Vue({
     },
     save(){
       Promise.all(Object.keys(this.langs).map((lang_key) => {
-        return writeLangFile(this.rootDir+this.langDir+lang_key+".json", this.langs[lang_key]);
+        return writeLangFile(path.join(this.rootDir, this.langDir, lang_key+".json"), this.langs[lang_key]);
       })).then(() => {
         alert("🙌 Files saved");
       }).catch((err) => {
