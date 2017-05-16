@@ -52,6 +52,9 @@ const app = new Vue({
       langs: {},
       baseLanguage: localStorage.getItem("baseLanguage") || 'en',
       scannedKeys: null,
+      scannedKeysFound: null,
+      scannedKeysFoundSelected: null,
+      showModal: false,
       query: '',
       newLangName: null,
       langDir: '/resources/lang',
@@ -97,11 +100,14 @@ const app = new Vue({
         files = files.concat(getFilesInDirDeep(this.rootDir+dir));
       });
       files = Array.from(files);
-      let keys = getKeysInFiles(files);
-      this.scannedKeys = keys;
+      let keysInfo = getKeysInFiles(files);
+      this.scannedKeys = keysInfo.keys;
+      this.scannedKeysFound = keysInfo.found;
     },
     reload(){
-      this.setRootDir(this.rootDir);
+      if(confirm("Sure? You will lose any unsaved changes 😱")){
+        this.setRootDir(this.rootDir);
+      }
     },
     save(){
       Promise.all(Object.keys(this.langs).map((lang_key) => {
@@ -115,6 +121,19 @@ const app = new Vue({
     },
     updateValue(key, value){
       Vue.set(this.langs[this.selectedLangKey], key, value);
+    },
+    showFound(key){
+      let counts = {};
+      this.scannedKeysFound[key].map((item) => item.replace(this.rootDir, ''))
+      .forEach((item) => {
+        if(!counts[item]) counts[item] = 0;
+        counts[item]++;
+      });
+      this.scannedKeysFoundSelected = counts;
+      this.showModal = true;
+    },
+    closeModal(){
+      this.showModal = false;
     },
     addLang(){
       let lang_key = this.newLangName.toLowerCase();

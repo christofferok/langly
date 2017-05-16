@@ -27,14 +27,20 @@ function getFilesInDirDeep(dir){
 function getKeysInFiles(files){
   const pattern = /(__)\(\s*[\'"](.*?)[\'"]\s*[\),]/g;
   let keys = new Set();
+  let found = new Set();
   for(let i = 0; files.length > i; i++){
     let fileContent = fs.readFileSync(files[i], 'utf8');
     let matches = null;
     while(matches = pattern.exec(fileContent)){
         keys.add(matches[2]);
+        
+        // Also record in which files it was found
+        found.add(matches[2]);
+        if(!found[matches[2]]) found[matches[2]] = [];
+        found[matches[2]].push(files[i]);
     };
   }
-  return Array.from(keys);
+  return {keys: Array.from(keys), found} ;
 }
 
 
