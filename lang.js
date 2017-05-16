@@ -25,7 +25,7 @@ function getFilesInDirDeep(dir){
 }
 
 function getKeysInFiles(files){
-  const pattern = /(__)\([\'"](.*)[\'"][\),]/g;
+  const pattern = /(__)\(\s*[\'"](.*?)[\'"]\s*[\),]/g;
   let keys = new Set();
   for(let i = 0; files.length > i; i++){
     let fileContent = fs.readFileSync(files[i], 'utf8');
