@@ -1,14 +1,14 @@
 {
   "name": "langly",
   "productName": "Langly",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Manage Laravel json language files",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "package": "electron-packager . --overwrite --prune=true --icon=icons/icon.icns --out=release-builds --ignore=usage.gif"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/christofferok/langly",
   "keywords": [
     "laravel",
     "language",
