@@ -1,7 +1,7 @@
 {
   "name": "langly",
   "productName": "Langly",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Manage Laravel json language files",
   "main": "main.js",
   "scripts": {
