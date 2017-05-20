@@ -1,4 +1,4 @@
-const {app, BrowserWindow, TouchBar} = require('electron');
+const {app, BrowserWindow, TouchBar, Menu} = require('electron');
 const {TouchBarLabel, TouchBarButton, TouchBarSpacer} = TouchBar;
 const path = require('path');
 const url = require('url');
@@ -32,6 +32,7 @@ const touchBar = new TouchBar([
 ])
 
 function createWindow () {  
+	
   mainWindow = new BrowserWindow({width: 800, height: 600, icon: path.join(__dirname, 'icons/icon.png')})
   mainWindow.setTouchBar(touchBar)
 
@@ -44,6 +45,8 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null
   });
+	
+	Menu.setApplicationMenu(require('./menu'));
   
 }
 
