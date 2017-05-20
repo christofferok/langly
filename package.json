@@ -6,7 +6,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . --overwrite --prune=true --icon=icons/icon.icns --out=release-builds"
+    "pack": "build --dir",
+    "dist": "build",
+    "dist-all": "build -mwl",
+    "postinstall": "install-app-deps",
+    "release": "build -mwl"
   },
   "repository": "https://github.com/christofferok/langly",
   "keywords": [
@@ -15,13 +19,41 @@
     "json",
     "localization"
   ],
-  "author": "Christoffer Korvald",
+  "author": {
+    "name": "Christoffer Korvald",
+    "email": "korvald@gmail.com",
+    "url": "christofferok.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.8",
-    "electron-packager": "^8.7.0"
+    "electron-builder": "^17.8.0"
   },
   "dependencies": {
+    "electron-is-dev": "^0.1.2",
+    "electron-updater": "^1.15.0",
+    "electron-log": "^2.2.6",
     "vue": "^2.3.2"
+  },
+  "build": {
+    "appId": "com.christofferok.langly",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "linux": {
+      "category": "Development",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
   }
 }
