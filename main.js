@@ -4,6 +4,8 @@ const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
 
+require('electron-context-menu')();
+
 let mainWindow;
 
 if (!isDev && process.platform !== 'linux') {
