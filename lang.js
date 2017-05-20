@@ -64,8 +64,15 @@ function getLangs(dir){
 }
 
 function writeLangFile(file, json){
+  
+  let sortedObject = {};
+  Object.keys(json)
+      .sort()
+      .forEach(function(v, i) {
+          sortedObject[v] = json[v];
+       });
   return new Promise((resolve, reject) => {
-    fs.writeFile(file, JSON.stringify(json, null, "  "), function(err) {
+    fs.writeFile(file, JSON.stringify(sortedObject, null, "  "), function(err) {
       if(err) reject(err);
       else resolve(file);
     });
