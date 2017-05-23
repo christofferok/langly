@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div id="app" v-cloak class="container-fluid">
+    <div id="app" v-cloak>
         
         <header class="d-md-flex">
           <div class="mr-3" style="width:40px;"><img class="logo" alt="Langly" title="Langly" src="icons/icon.png" srcset="icons/icon.png 1x, icons/icon@2x.png 2x"></div>
@@ -40,46 +40,47 @@
           </div>
         </header>
         
+        <div class="main">
         
-        <div v-if="rootDir">
-          <div class="lang-items" v-if="selectedLangKey">
-            <div :class="{'has-warning': !item.value || item.value == ''}" class="form-group row" v-for="(item, index) of filteredLangItems">
-              <label :for="'key-'+index" class="col-form-label col-sm-6 text-right">
-                <span class="badge badge-danger" v-if="missingKeys.indexOf(item.key) > -1">Not in lang file</span>
-                <span class="badge badge-info" v-if="extraKeys.indexOf(item.key) > -1">Not in app</span>
-                <a style="color:#fff; float:left;" @click="showFound(item.key)" class="badge badge-info" v-if="scannedKeysFound[item.key]">{{ scannedKeysFound[item.key].length }}</a>
-                {{ item.key }}
-              </label>
-              <div class="col-sm-6">
-                <textarea rows="1" :id="'key-'+index" class="form-control" :value="item.value" @input="updateValue(item.key, $event.target.value);"></textarea>
+          <div v-if="rootDir">
+            <div class="lang-items" v-if="selectedLangKey">
+              <div :class="{'has-danger': !item.value || item.value == '', 'has-warning': extraKeys.indexOf(item.key) > -1}" class="form-group row" v-for="(item, index) of filteredLangItems">
+                <label :for="'key-'+index" class="col-form-label col-sm-6 text-right">
+                  <span class="badge badge-warning badge-not-found" v-if="extraKeys.indexOf(item.key) > -1">Not in app</span>
+                  <a @click="showFound(item.key)" class="badge badge-info badge-num-found" v-if="scannedKeysFound[item.key]">{{ scannedKeysFound[item.key].length }}</a>
+                  {{ item.key }}
+                </label>
+                <div class="col-sm-6">
+                  <textarea rows="1" :id="'key-'+index" class="form-control" :value="item.value" @input="updateValue(item.key, $event.target.value);"></textarea>
+                </div>
+              </div>
+              <div v-if="filteredLangItems.length == 0" class="text-muted">
+                <span v-if="query != ''">Your search for '{{ query }}' didn't match any keys</span>
+                <span v-else>No keys found</span>
               </div>
             </div>
-            <div v-if="filteredLangItems.length == 0" class="text-muted">
-              <span v-if="query != ''">Your search for '{{ query }}' didn't match any keys</span>
-              <span v-else>No keys found</span>
+            <div v-else class="text-muted">
+              Found {{ allKeys.length }} keys in the app. Start by adding a lang file
             </div>
           </div>
           <div v-else class="text-muted">
-            Found {{ allKeys.length }} keys in the app. Start by adding a lang file
+            Select a Laravel app or just drop the directory in the app
           </div>
-        </div>
-        <div v-else class="text-muted">
-          Select a Laravel app or just drop the directory in the app
-        </div>
-        
-        <div class="custom-modal-backdrop" v-show="showModal" @click.self="closeModal">
-          <div class="custom-modal" v-show="showModal">
-            <button type="button" class="close" title="Close" @click.prevent="closeModal">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <div v-if="scannedKeysFoundSelected">
-              <h3>Found in</h3>
-              <table>
-                <tr v-for="(value, key) in scannedKeysFoundSelected">
-                  <td><span class="badge badge-info">{{ value }}</span></td>
-                  <td>{{ key }}</td>
-                </tr>
-              </table>
+          
+          <div class="custom-modal-backdrop" v-show="showModal" @click.self="closeModal">
+            <div class="custom-modal" v-show="showModal">
+              <button type="button" class="close" title="Close" @click.prevent="closeModal">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div v-if="scannedKeysFoundSelected">
+                <h3>Found in</h3>
+                <table>
+                  <tr v-for="(value, key) in scannedKeysFoundSelected">
+                    <td><span class="badge badge-info">{{ value }}</span></td>
+                    <td>{{ key }}</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>

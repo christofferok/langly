@@ -1,21 +1,36 @@
 [v-cloak]{
   display: none;
 }
+body{
+  overflow: hidden;
+}
+#app{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  display: relative;
+}
 header{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 15px;
-  z-index: 100;
   border-bottom: 1px solid #ccc;
   background: #DBE7E2;
+  padding: 15px;
 }
 header h1{
   font-size: 1.7em;
 }
-body{
-  margin-top: 85px;
+
+.main{
+  padding: 15px;
+  overflow: scroll;
+  flex: 1;
+}
+
+.badge-num-found{
+  color: #fff !important;
+  float: left;
+}
+.badge-not-found{
+  float: left;
 }
 
 .lang-items .row{
