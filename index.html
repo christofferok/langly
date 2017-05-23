@@ -47,7 +47,7 @@
           <div v-if="extraKeys.length > 0" class="status">
             <span class="badge badge-warning">{{ extraKeys.length }}</span> not found in app
           </div>
-          <div v-if="missingKeys.length > 0" class="status">
+          <div class="status status-missing" :class="{'active': this.filterOnKeys !== null}" @click.prevent="toggleFilterOnKeysMissing()">
             <span class="badge badge-danger">{{ missingKeys.length }}</span> missing
           </div>
         </div>

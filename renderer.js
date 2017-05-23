@@ -59,6 +59,7 @@ const app = new Vue({
       newLangName: null,
       langDir: '/resources/lang',
       scanDirs: ['/resources/views','/app'],
+      filterOnKeys: null,
     };
   },
   methods:{
@@ -153,6 +154,13 @@ const app = new Vue({
       Vue.set(this.langs, lang_key, emptyLang);
       this.selectedLangKey = lang_key;
       this.newLangName = '';
+    },
+    toggleFilterOnKeysMissing(){
+      if(this.filterOnKeys !== null){
+        this.filterOnKeys = null;
+        return;
+      }
+      this.filterOnKeys = this.missingKeys;
     }
   },
   computed:{
@@ -188,7 +196,12 @@ const app = new Vue({
     },
     filteredLangItems(){
       let q = this.query.toLowerCase();
-      return this.allItems.filter((item) => {
+      return this.allItems
+        .filter((item) => {
+          if(this.filterOnKeys == null) return true;
+          return this.filterOnKeys.indexOf(item.key) !== -1;
+        })
+        .filter((item) => {
         return q == '' || item.key.toLowerCase().indexOf(q) > -1;
       }).sort((a, b) => {
         if(a.key.toLowerCase() < b.key.toLowerCase()) return -1;

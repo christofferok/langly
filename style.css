@@ -44,6 +44,14 @@ header h1{
 .statuses .status:last-child{
   margin-right: 0;
 }
+.statuses .status.active{
+  text-decoration: underline;
+}
+.statuses .status.status-missing{
+  cursor: pointer;
+  user-select: none;
+  
+}
 
 .delete-item-btn{
   background-image: url(icons/trash.svg);
