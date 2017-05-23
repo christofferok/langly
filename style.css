@@ -33,6 +33,18 @@ header h1{
   float: left;
 }
 
+.statuses{
+  display: flex;
+  padding: 15px; 
+  border-bottom: 1px solid #eee;
+}
+.statuses .status{
+  margin-right: 15px;
+}
+.statuses .status:last-child{
+  margin-right: 0;
+}
+
 .lang-items .row{
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;
