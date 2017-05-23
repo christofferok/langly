@@ -3,6 +3,7 @@ const {TouchBarLabel, TouchBarButton, TouchBarSpacer} = TouchBar;
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+const config = require('./config.js');
 
 require('electron-context-menu')();
 
@@ -35,7 +36,15 @@ const touchBar = new TouchBar([
 
 function createWindow () {  
 	
-  mainWindow = new BrowserWindow({width: 800, height: 600, icon: path.join(__dirname, 'icons/icon.png')})
+	const lastWindowState = config.get('lastWindowState');
+	
+  mainWindow = new BrowserWindow({
+		x: lastWindowState.x,
+		y: lastWindowState.y,
+		width: lastWindowState.width,
+		height: lastWindowState.height,
+		icon: path.join(__dirname, 'icons/icon.png')
+	});
   mainWindow.setTouchBar(touchBar)
 
   mainWindow.loadURL(url.format({
@@ -62,4 +71,12 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
+});
+
+app.on('before-quit', () => {
+	isQuitting = true;
+
+	if (!mainWindow.isFullScreen()) {
+		config.set('lastWindowState', mainWindow.getBounds());
+	}
 });
