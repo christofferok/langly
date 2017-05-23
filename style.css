@@ -45,6 +45,16 @@ header h1{
   margin-right: 0;
 }
 
+.delete-item-btn{
+  background-image: url(icons/trash.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 15px;
+  height: auto;
+  display: block;
+}
+
 .lang-items .row{
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;

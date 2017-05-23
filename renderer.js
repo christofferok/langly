@@ -122,6 +122,9 @@ const app = new Vue({
     updateValue(key, value){
       Vue.set(this.langs[this.selectedLangKey], key, value);
     },
+    deleteValue(key){
+      Vue.delete(this.langs[this.selectedLangKey], key);
+    },
     showFound(key){
       let counts = {};
       this.scannedKeysFound[key].map((item) => item.replace(this.rootDir, ''))

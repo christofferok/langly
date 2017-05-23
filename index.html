@@ -62,7 +62,10 @@
                   {{ item.key }}
                 </label>
                 <div class="col-sm-6">
-                  <textarea rows="1" :id="'key-'+index" class="form-control" :value="item.value" @input="updateValue(item.key, $event.target.value);"></textarea>
+                  <div class="d-flex">
+                    <textarea rows="1" :id="'key-'+index" class="form-control" :value="item.value" @input="updateValue(item.key, $event.target.value);"></textarea>
+                    <a href="#" class="ml-4 text-danger delete-item-btn" @click.prevent="deleteValue(item.key)"></a>
+                  </div>
                 </div>
               </div>
               <div v-if="filteredLangItems.length == 0" class="text-muted">
