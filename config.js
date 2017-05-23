@@ -6,6 +6,9 @@ module.exports = new Config({
 		lastWindowState: {
 			width: 800,
 			height: 600
-		}
+		},
+		saveIndentation: 2,
+		sortKeysOnSave: true,
+		baseLanguage: 'en'
 	}
 });

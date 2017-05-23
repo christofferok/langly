@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Settings | Langly</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script>
+    const config = require('./config.js');
+    
+    document.addEventListener("DOMContentLoaded", function(event) {
+      document.getElementById('save_indentation').value = config.get('saveIndentation');
+      document.getElementById('sort_keys_on_save').checked = config.get('sortKeysOnSave');
+      document.getElementById('base_language').value = config.get('baseLanguage');
+    });
+    
+    function savePreferences(){
+      console.log("Yeah!");
+      config.set('saveIndentation', document.getElementById('save_indentation').value);
+      config.set('sortKeysOnSave', document.getElementById('sort_keys_on_save').checked);
+      config.set('baseLanguage', document.getElementById('base_language').value);
+      alert("🙌 Preferences saved");
+    }
+    
+    </script>
+  </head>
+  <body>
+    
+    <div class="container-fluid">
+      <h1>Preferences</h1>
+      
+      <div class="form-group row">
+        <label class="col-5 col-form-label">Spaces on save</label>
+        <div class="col-7">
+          <input type="number" class="form-control" id="save_indentation">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-5 col-form-label">Sort keys on save</label>
+        <div class="col-7">
+          <input type="checkbox" id="sort_keys_on_save">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-5 col-form-label">Base language</label>
+        <div class="col-7">
+          <input type="text" class="form-control" id="base_language">
+        </div>
+      </div>
+      <div class="form-group text-right">
+        <button onclick="savePreferences()" class="btn btn-primary">Save preferences</button>
+      </div>
+    </div>
+    
+  </body>
+</html>

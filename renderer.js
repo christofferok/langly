@@ -6,11 +6,12 @@ const {ipcRenderer} = require('electron');
 const fs = require('fs');
 const path = require('path');
 
+const config = require('./config.js');
+
 // Array diff
 Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
-
 
 function getDirectory(){
   return new Promise((resolve, reject) => {
@@ -47,10 +48,9 @@ const app = new Vue({
   },
   data(){
     return {
-      rootDir: localStorage.getItem("rootDir") || null,
+      rootDir: config.get("rootDir") || null,
       selectedLangKey: null,
       langs: {},
-      baseLanguage: localStorage.getItem("baseLanguage") || 'en',
       scannedKeys: null,
       scannedKeysFound: null,
       scannedKeysFoundSelected: null,
@@ -80,7 +80,7 @@ const app = new Vue({
         return false;
       }
       this.rootDir = dir;
-      localStorage.setItem("rootDir", dir);
+      config.set("rootDir", dir);
       
       const langs = getLangs(this.rootDir+this.langDir);
       if(Object.keys(langs).length > 0){
@@ -145,7 +145,7 @@ const app = new Vue({
       }
       let emptyLang = {};
       this.allKeys.forEach(key => {
-        emptyLang[key] = (lang_key == this.baseLanguage) ? key : null;
+        emptyLang[key] = (lang_key == config.get('baseLanguage')) ? key : null;
       });
       Vue.set(this.langs, lang_key, emptyLang);
       this.selectedLangKey = lang_key;

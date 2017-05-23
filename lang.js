@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const config = require('./config.js');
 
 function getFilesInDirDeep(dir){
   //console.log(`Looking into dir ${dir}`);
@@ -66,13 +67,21 @@ function getLangs(dir){
 function writeLangFile(file, json){
   
   let sortedObject = {};
-  Object.keys(json)
-      .sort()
-      .forEach(function(v, i) {
-          sortedObject[v] = json[v];
-       });
+  if(config.get('sortKeysOnSave')){
+    Object.keys(json)
+        .sort()
+        .forEach(function(v, i) {
+            sortedObject[v] = json[v];
+         });
+  }
+  else{
+    sortedObject = json;
+  }
+
+  const indentation = " ".repeat(config.get('saveIndentation'));
+
   return new Promise((resolve, reject) => {
-    fs.writeFile(file, JSON.stringify(sortedObject, null, "  "), function(err) {
+    fs.writeFile(file, JSON.stringify(sortedObject, null, indentation), function(err) {
       if(err) reject(err);
       else resolve(file);
     });
