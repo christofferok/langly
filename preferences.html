@@ -4,52 +4,65 @@
     <meta charset="UTF-8">
     <title>Settings | Langly</title>
     <link rel="stylesheet" href="bootstrap.min.css">
-    <script>
-    const config = require('./config.js');
-    
-    document.addEventListener("DOMContentLoaded", function(event) {
-      document.getElementById('save_indentation').value = config.get('saveIndentation');
-      document.getElementById('sort_keys_on_save').checked = config.get('sortKeysOnSave');
-      document.getElementById('base_language').value = config.get('baseLanguage');
-    });
-    
-    function savePreferences(){
-      console.log("Yeah!");
-      config.set('saveIndentation', document.getElementById('save_indentation').value);
-      config.set('sortKeysOnSave', document.getElementById('sort_keys_on_save').checked);
-      config.set('baseLanguage', document.getElementById('base_language').value);
-      alert("🙌 Preferences saved");
-    }
-    
-    </script>
   </head>
   <body>
     
-    <div class="container-fluid">
+    <div class="container-fluid" id="pref">
       <h1>Preferences</h1>
       
       <div class="form-group row">
         <label class="col-5 col-form-label">Spaces on save</label>
         <div class="col-7">
-          <input type="number" class="form-control" id="save_indentation">
+          <input type="number" class="form-control" v-model="saveIndentation">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-5 col-form-label">Sort keys on save</label>
         <div class="col-7">
-          <input type="checkbox" id="sort_keys_on_save">
+          <input type="checkbox" v-model="sortKeysOnSave">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-5 col-form-label">Base language</label>
         <div class="col-7">
-          <input type="text" class="form-control" id="base_language">
+          <input type="text" class="form-control" v-model="baseLanguage">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-5 col-form-label">Search for functions</label>
+        <div class="col-7">
+          <div v-for="func in possibleFunctions">
+            <label><input type="checkbox" :value="func" v-model="functionSearch"> {{ func }}</label>
+          </div>
         </div>
       </div>
       <div class="form-group text-right">
-        <button onclick="savePreferences()" class="btn btn-primary">Save preferences</button>
+        <button @click="save" class="btn btn-primary">Save preferences</button>
       </div>
     </div>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script>
+    const config = require('./config.js');
+    const pref = new Vue({
+      el: "#pref",
+      data:{
+        saveIndentation: config.get('saveIndentation'),
+        sortKeysOnSave: config.get('sortKeysOnSave'),
+        baseLanguage: config.get('baseLanguage'),
+        functionSearch: config.get('functionSearch'),
+        possibleFunctions: ['__', 'trans', 'trans_choice', 'Lang::get', 'Lang::choice', 'Lang::trans', 'Lang::transChoice', '@lang', '@choice']
+      },
+      methods:{
+        save(){
+          config.set('saveIndentation', this.saveIndentation);
+          config.set('sortKeysOnSave', this.sortKeysOnSave);
+          config.set('baseLanguage', this.baseLanguage);
+          config.set('functionSearch', this.functionSearch);
+          alert("🙌 Preferences saved");
+        }
+      }
+    });
     
+    </script>
   </body>
 </html>

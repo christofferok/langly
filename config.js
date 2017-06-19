@@ -9,6 +9,7 @@ module.exports = new Config({
 		},
 		saveIndentation: 2,
 		sortKeysOnSave: true,
-		baseLanguage: 'en'
+		baseLanguage: 'en',
+		functionSearch: ['__']
 	}
 });

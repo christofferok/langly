@@ -6,8 +6,8 @@ const isDev = require('electron-is-dev');
 
 function openPreferences(){
   configWindow = new BrowserWindow({
-    width: 400,
-    height: 300
+    width: 500,
+    height: 600
   });
   configWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'preferences.html'),

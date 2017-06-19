@@ -101,7 +101,7 @@ const app = new Vue({
         files = files.concat(getFilesInDirDeep(this.rootDir+dir));
       });
       files = Array.from(files);
-      let keysInfo = getKeysInFiles(files);
+      let keysInfo = getKeysInFiles(files, config.get('functionSearch', []));
       this.scannedKeys = keysInfo.keys;
       this.scannedKeysFound = keysInfo.found;
     },
