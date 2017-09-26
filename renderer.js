@@ -58,7 +58,7 @@ const app = new Vue({
       query: '',
       newLangName: null,
       langDir: '/resources/lang',
-      scanDirs: ['/resources/views','/app'],
+      scanDirs: ['/resources/views', '/app', '/routes'],
       filterOnKeys: null,
     };
   },
