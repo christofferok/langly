@@ -26,16 +26,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "electron": "~1.7.8",
-    "electron-builder": "^19.31.1"
+    "electron": "~1.8.2-beta.2",
+    "electron-builder": "^19.46.3"
   },
   "dependencies": {
     "electron-config": "^1.0.0",
     "electron-context-menu": "^0.9.0",
     "electron-is-dev": "^0.3.0",
-    "electron-log": "^2.2.9",
-    "electron-updater": "^2.10.0",
-    "vue": "^2.4.4"
+    "electron-log": "^2.2.11",
+    "electron-updater": "^2.16.1",
+    "vue": "^2.5.8"
   },
   "build": {
     "appId": "com.christofferok.langly",
