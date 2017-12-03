@@ -26,7 +26,7 @@ function getFilesInDirDeep(dir){
 }
 
 function getKeysInFiles(files, funcs){
-  const pattern = new RegExp('[^\w]('+funcs.join('|')+')\\(\\s*[\'"](.*?)[\'"]\\s*[\\),]', "g");
+  const pattern = new RegExp('[^\w]('+funcs.join('|').replace('$','\\$')+')\\(\\s*[\'"](.*?)[\'"]\\s*[\\),]', "g");
   let keys = new Set();
   let found = new Set();
   for(let i = 0; files.length > i; i++){
